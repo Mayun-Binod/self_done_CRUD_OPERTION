@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from StudentCrud import views
+admin.site.site_header = "Binod Admin"
+admin.site.site_title = "Binod Admin Portal"
+admin.site.index_title = "Welcome to Binod Portal"
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.add_show,name="addshow"),
 ]

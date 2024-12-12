@@ -1,0 +1,10 @@
+{% extends "StudentCrud/base.html" %}
+
+{% block content %}
+<h4>Add Students</h4>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" class="btn btn-secondary" value="ADD">
+</form>
+{% endblock content %}
