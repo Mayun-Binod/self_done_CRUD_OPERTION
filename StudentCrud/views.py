@@ -1,9 +1,18 @@
 from django.shortcuts import render
 from StudentCrud.forms import StudentRegistration
+from .models import User
 # Create your views here.
 def add_show(request):
+    stud=User.objects.all()
     if request.method=="POST":
         fm=StudentRegistration(request.POST)
+        if fm.is_valid():
+            nm=fm.cleaned_data["name"]
+            em=fm.cleaned_data["email"]
+            pw=fm.cleaned_data["password"]
+            store=User(name=nm,email=em,password=pw)
+            store.save()
+            fm=StudentRegistration()
     else:
         fm=StudentRegistration()
-    return render(request,"StudentCrud/addandshow.html",{'form':fm})
+    return render(request,"StudentCrud/addandshow.html",{'form':fm,"stu":stud,})
