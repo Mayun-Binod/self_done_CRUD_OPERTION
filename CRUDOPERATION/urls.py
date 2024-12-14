@@ -23,4 +23,6 @@ admin.site.index_title = "Welcome to Binod Portal"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.add_show,name="addshow"),
+    path('update/<int:id>/',views.update_data,name="updatedata"),
+    path('delete/<int:id>/',views.delete_data,name="deletedata"),
 ]

@@ -1,19 +1,81 @@
-{% extends "StudentCrud/base.html" %} {% block content %}
-<div class="row">
-  <div class="col-sm-5">
-    <h4 class="text-center alert alert-dark bg-dark text-light  fw-bold">
-      Add New Students
-    </h4>
-    <form action="" method="POST">
-      {% csrf_token %} {{form.as_p}}
-      <input type="submit" class="btn btn-secondary" value="ADD" />
-    </form>
+{% extends "StudentCrud/base.html" %}
+
+{% block body_class %}dark-background{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+  <!-- Add New Students Section -->
+  <div class="col-lg-4 col-md-5">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-dark text-light text-center fw-bold rounded-4">
+        <h4>Add New Student</h4>
+      </div>
+      <div class="card-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success rounded-3 py-2">Add Student</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
-  <div class="col-sm-7">
-    <h4 class="text-center alert alert-dark text-primary fw-bold">
-        Show Added Students Details
-      </h4>
+  <!-- Show Added Students Section -->
+  <div class="col-lg-7 offset-lg-1 col-md-7 mt-4 mt-md-0">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-light text-center fw-bold rounded-4">
+        <h4>Student Details</h4>
+      </div>
+      <div class="card-body">
+        {% if stu %}
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered text-center">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Student Email</th>
+                <th scope="col">Student Password</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for store in stu %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ store.name }}</td>
+                <td>{{ store.email }}</td>
+                <td>{{ store.password }}</td>
+                <td>
+                  <div class="d-flex gap-2 justify-content-center">
+                    <a href="{% url 'updatedata' store.id %}" class="btn btn-warning btn-sm rounded-3">
+                      <i class="fa-regular fa-pen-to-square"></i> Edit
+                    </a>
+                    <form action="{% url 'deletedata' store.id %}" method="POST" onsubmit="return confirmDelete()">
+                      {% csrf_token %}
+                      <input type="submit" value="Delete" class="btn btn-outline-danger btn-sm rounded-3">
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <h5 class="text-center text-danger">No Student Data Found</h5>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this student?");
+    }
+</script>
+
 {% endblock content %}

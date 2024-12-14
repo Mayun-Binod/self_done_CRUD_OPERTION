@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD-OPERATION</title>
+    <title>CRUD Operation</title>
     <link rel="icon" href="{% static 'StudentCrud/images/logo.png' %}">
     <link rel="stylesheet" href="{% static 'StudentCrud/css/fontAwesome.css' %}">
     <link rel="stylesheet" href="{% static 'StudentCrud/css/bootstrap.css' %}">
 </head>
-<body>
-<div class="container mt-2">
-<h1 class="text-center alert alert-primary">Welcome to CRUD Operation Of Students.</h1>
-{% block content %}
+<body class="{% block body_class %} {% endblock %}">
 
-{% endblock content %}
+<div class="container mt-5">
+    <h1 class="text-center alert alert-primary rounded-4 fw-bold py-3">WELCOME TO CRUD OPERATION OF STUDENTS</h1>
+    {% block content %}
+    {% endblock content %}
 </div>
-    
-    <script src="{% static 'StudentCrud/js/jquery.js' %}"></script>
-    <script src="{% static 'StudentCrud/js/popper.js' %}"></script>
-    <script src="{% static 'StudentCrud/js/fontAwesome.js' %}"></script>
-    <script src="{% static 'StudentCrud/js/bootstrap.js' %}"></script>
+
+<script src="{% static 'StudentCrud/js/jquery.js' %}"></script>
+<script src="{% static 'StudentCrud/js/popper.js' %}"></script>
+<script src="{% static 'StudentCrud/js/fontAwesome.js' %}"></script>
+<script src="{% static 'StudentCrud/js/bootstrap.js' %}"></script>
 
 </body>
 </html>
